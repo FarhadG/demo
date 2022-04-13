@@ -155,15 +155,12 @@ AFRAME.registerComponent('beat-generator', {
   processBeats: function () {
     if (this.data.hasSongLoadError) { return; }
 
-    this.beatData._notes = this.beatData._notes.reduce((result, note) => {
-      const mine = {
-        ...note,
-        _type: 3,
-        _lineIndex: (note._lineIndex + 2) % 4,
-        _lineLayer: (note._lineLayer + 2) % 3
-      };
-      return result.concat([note, mine]);
-    }, []);
+    this.beatData._notes = this.beatData._notes.map(note => {
+      if (Math.random() > 0.5) {
+        note._type = 3;
+      }
+      return note;
+    });
 
     // Reset variables used during playback.
     // Beats spawn ahead of the song and get to the user in sync with the music.

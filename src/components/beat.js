@@ -423,10 +423,9 @@ AFRAME.registerComponent('beat', {
       blockEl,
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
-    blockEl.setAttribute('materials', 'name', 'beat');
+    blockEl.setAttribute('materials', 'name', type === 'mine' ? 'mine' : 'beat');
     const mesh = blockEl.getObject3D('mesh');
     mesh.geometry.computeBoundingBox();
-
     this.bbox = mesh.geometry.boundingBox;
 
     if (this.data.type === 'mine') {
@@ -635,12 +634,19 @@ AFRAME.registerComponent('beat', {
  */
 const geometries = {};
 function setObjModelFromTemplate (el, templateId) {
+
   // Load into cache.
   if (!geometries[templateId]) {
     const templateEl = document.getElementById(templateId);
     if (templateEl.getObject3D('mesh')) {
       // Set cache.
-      geometries[templateId] = templateEl.getObject3D('mesh').children[0].geometry;
+      // if (templateId === 'mineObjTemplate') {
+      if (templateEl.getObject3D('mesh').children.length) {
+        geometries[templateId] = templateEl.getObject3D('mesh').children[0].geometry;
+      } else {
+        geometries[templateId] = templateEl.getObject3D('mesh').geometry;
+      }
+
     } else {
       // Wait.
       templateEl.addEventListener('object3dset', evt => {

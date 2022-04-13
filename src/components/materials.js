@@ -17,9 +17,12 @@ AFRAME.registerSystem('materials', {
 
     // Generated textures.
     this.beatsCanvas = document.createElement('canvas');
-    this.beatsTexture = new THREE.CanvasTexture(this.beatsCanvas);
+    // this.beatsTexture = new THREE.CanvasTexture(this.beatsCanvas);
+    this.beatsTexture = new THREE.TextureLoader().load(document.getElementById('num2Img').src);
+    this.mineTexture = new THREE.TextureLoader().load(document.getElementById('num9Img').src);
     this.generateBeatsTexture();
     this.textureList.push(this.beatsTexture);
+    this.textureList.push(this.mineTexture);
 
     this.envmapCanvas = document.createElement('canvas');
     this.envmapTexture = new THREE.CanvasTexture(this.envmapCanvas);
@@ -221,7 +224,7 @@ AFRAME.registerSystem('materials', {
       envMap: weaponHandleEnvTexture
     });
 
-    const fistEnvTexture = new THREE.TextureLoader().load(document.getElementById('weapon2Img').src);
+    const fistEnvTexture = new THREE.TextureLoader().load(document.getElementById('weaponnum2Img').src);
     fistEnvTexture.mapping = THREE.SphericalReflectionMapping;
     this.leftFist = new THREE.MeshStandardMaterial({
       roughness: 0.3,
@@ -238,15 +241,22 @@ AFRAME.registerSystem('materials', {
       transparent: true
     });
 
-    this.beat = new THREE.MeshLambertMaterial({map: this.beatsTexture, transparent: true});
+    this.beat = new THREE.MeshLambertMaterial({
+      map: this.beatsTexture, transparent: true
+    });
+
+    this.mine = new THREE.MeshLambertMaterial({
+      map: this.mineTexture, transparent: true
+    });
+
     this.blueBeatPieces = new THREE.MeshLambertMaterial({
-      map: this.beatsTexture,
+      // map: this.beatsTexture,
       color: scheme.secondary,
       emissive: scheme.secondary,
       emissiveIntensity: 0.2
     });
     this.redBeatPieces = new THREE.MeshLambertMaterial({
-      map: this.beatsTexture,
+      // map: this.beatsTexture,
       color: scheme.primary,
       emissive: scheme.primary,
       emissiveIntensity: 0.2
@@ -452,7 +462,8 @@ AFRAME.registerSystem('materials', {
     set(this.tunnel, 'color2', scheme.secondary);
     set(this.tunnel, 'color3', scheme.tertiary);
 
-    this.generateBeatsTexture();
+    // TODO
+    // this.generateBeatsTexture();
     // this.generateCutFxTexture();
     this.generateEnvmapTexture();
     this.generateFistsTexture();
@@ -659,6 +670,7 @@ AFRAME.registerComponent('materials', {
 
   applyMaterial: function (obj) {
     if (obj.detail) { obj = obj.detail.model; }
+
     if (this.data.recursive) {
       obj.traverse(o => {
         if (o.type === 'Mesh') {

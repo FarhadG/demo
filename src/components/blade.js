@@ -106,10 +106,7 @@ AFRAME.registerComponent('blade', {
 
       // Increase hitbox for high beats.
       bbox.copy(beat.bbox);
-      bbox.expandByScalar(0.02);
-      if (beat.horizontalPosition === LEFT || beat.horizontalPosition === RIGHT) {
-        bbox.expandByScalar(0.07);
-      }
+      bbox.expandByScalar(2);
 
       if (bbox.intersectsTriangle(bladeLocalTriangle)) { return true; }
 
