@@ -51,13 +51,13 @@ const WEAPON_COLORS = {right: 'blue', left: 'red'};
 
 const ROTATIONS = {
   right: 0,
-  upright: 45,
-  up: 90,
-  upleft: 135,
-  left: 180,
-  downleft: 225,
-  down: 270,
-  downright: 315
+  upright: 0,
+  up: 0,
+  upleft: 0,
+  left: 0,
+  downleft: 0,
+  down: 0,
+  downright: 0
 };
 
 const SIZES = {
@@ -423,7 +423,9 @@ AFRAME.registerComponent('beat', {
       blockEl,
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
-    blockEl.setAttribute('materials', 'name', type === 'mine' ? 'mine' : 'beat');
+    const value = Math.random() > 0.5 ? '11' : '12';
+
+    blockEl.setAttribute('materials', 'name', type === 'mine' ? 'mine' : `beat${value}`);
     const mesh = blockEl.getObject3D('mesh');
     mesh.geometry.computeBoundingBox();
     this.bbox = mesh.geometry.boundingBox;

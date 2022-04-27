@@ -18,10 +18,18 @@ AFRAME.registerSystem('materials', {
     // Generated textures.
     this.beatsCanvas = document.createElement('canvas');
     // this.beatsTexture = new THREE.CanvasTexture(this.beatsCanvas);
-    this.beatsTexture = new THREE.TextureLoader().load(document.getElementById('num2Img').src);
-    this.mineTexture = new THREE.TextureLoader().load(document.getElementById('num9Img').src);
+    this.beats11Texture = new THREE.TextureLoader().load(document.getElementById('num11Img').src);
+    this.beats12Texture = new THREE.TextureLoader().load(document.getElementById('num12Img').src);
+    this.beats13Texture = new THREE.TextureLoader().load(document.getElementById('num13Img').src);
+    this.beats14Texture = new THREE.TextureLoader().load(document.getElementById('num14Img').src);
+
+    // this.beatsTexture = new THREE.TextureLoader().load(document.getElementById('num11Img').src);
+    this.mineTexture = new THREE.TextureLoader().load(document.getElementById('xImg').src);
     this.generateBeatsTexture();
-    this.textureList.push(this.beatsTexture);
+    this.textureList.push(this.beats11Texture);
+    this.textureList.push(this.beats12Texture);
+    this.textureList.push(this.beats13Texture);
+    this.textureList.push(this.beats14Texture);
     this.textureList.push(this.mineTexture);
 
     this.envmapCanvas = document.createElement('canvas');
@@ -224,7 +232,7 @@ AFRAME.registerSystem('materials', {
       envMap: weaponHandleEnvTexture
     });
 
-    const fistEnvTexture = new THREE.TextureLoader().load(document.getElementById('weaponnum2Img').src);
+    const fistEnvTexture = new THREE.TextureLoader().load(document.getElementById('weaponnum11Img').src);
     fistEnvTexture.mapping = THREE.SphericalReflectionMapping;
     this.leftFist = new THREE.MeshStandardMaterial({
       roughness: 0.3,
@@ -241,8 +249,20 @@ AFRAME.registerSystem('materials', {
       transparent: true
     });
 
-    this.beat = new THREE.MeshLambertMaterial({
-      map: this.beatsTexture, transparent: true
+    this.beat11 = new THREE.MeshLambertMaterial({
+      map: this.beats11Texture, transparent: true
+    });
+
+    this.beat12 = new THREE.MeshLambertMaterial({
+      map: this.beats12Texture, transparent: true
+    });
+
+    this.beat13 = new THREE.MeshLambertMaterial({
+      map: this.beats13Texture, transparent: true
+    });
+
+    this.beat14 = new THREE.MeshLambertMaterial({
+      map: this.beats14Texture, transparent: true
     });
 
     this.mine = new THREE.MeshLambertMaterial({
@@ -250,17 +270,19 @@ AFRAME.registerSystem('materials', {
     });
 
     this.blueBeatPieces = new THREE.MeshLambertMaterial({
-      // map: this.beatsTexture,
+      // map: this.beats11Texture,
       color: scheme.secondary,
       emissive: scheme.secondary,
       emissiveIntensity: 0.2
     });
+
     this.redBeatPieces = new THREE.MeshLambertMaterial({
-      // map: this.beatsTexture,
+      // map: this.beats15Texture,
       color: scheme.primary,
       emissive: scheme.primary,
       emissiveIntensity: 0.2
     });
+
     this.minePieces = new THREE.MeshLambertMaterial({
       color: scheme.tertiary,
       emissive: scheme.tertiary,
@@ -516,12 +538,12 @@ AFRAME.registerSystem('materials', {
       `rgba(${tertiary.r}, ${tertiary.g}, ${tertiary.b}, 0)`,
       tertiary.getStyle(), 0, 28, 512, 4);
 
-    const texture = this.beatsTexture;
-    texture.generateMipmaps = false;
-    texture.magFilter = THREE.LinearFilter;
-    texture.minFilter = THREE.LinearFilter;
-    texture.needsUpdate = true;
-    return texture;
+    // const texture = this.beatsTexture;
+    // texture.generateMipmaps = false;
+    // texture.magFilter = THREE.LinearFilter;
+    // texture.minFilter = THREE.LinearFilter;
+    // texture.needsUpdate = true;
+    // return texture;
   },
 
   generateFistsTexture: function () {
