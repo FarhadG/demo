@@ -681,7 +681,7 @@ function canvasGradient (ctx, col1, col2, x, y, width, height) {
 }
 
 function forEachBeat(cb) {
-  for (let i = 10; i <= 20; i++) {
+  for (let i = 1; i <= 99; i++) {
     cb({
       textureName: `beat${i}Texture`,
       beatName: `beat${i}`,

@@ -67,8 +67,8 @@ const SIZES = {
 };
 
 const correctValues = [], wrongValues = [];
-for (let i = 0; i <= 100; i++) {
-  if (i % 9 === 0) {
+for (let i = 1; i <= 99; i++) {
+  if (i % 5 === 0) {
     correctValues.push(i);
   } else {
     wrongValues.push(i);
@@ -432,7 +432,8 @@ AFRAME.registerComponent('beat', {
       blockEl,
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
-    const value = type === 'mine' ? '20' : '10';
+    const numberBucket = type === 'mine' ? wrongValues : correctValues;
+    const value = numberBucket[Math.floor(Math.random() * numberBucket.length)];
     blockEl.setAttribute('materials', 'name', `beat${value}`);
 
     const mesh = blockEl.getObject3D('mesh');
