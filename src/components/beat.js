@@ -51,13 +51,13 @@ const WEAPON_COLORS = {right: 'blue', left: 'red'};
 
 const ROTATIONS = {
   right: 0,
-  upright: 45,
-  up: 90,
-  upleft: 135,
-  left: 180,
-  downleft: 225,
-  down: 270,
-  downright: 315
+  upright: 0,
+  up: 0,
+  upleft: 0,
+  left: 0,
+  downleft: 0,
+  down: 0,
+  downright: 0
 };
 
 const SIZES = {
@@ -65,6 +65,15 @@ const SIZES = {
   [PUNCH]: 0.35,
   [RIDE]: 0.4
 };
+
+const correctValues = [], wrongValues = [];
+for (let i = 0; i <= 100; i++) {
+  if (i % 9 === 0) {
+    correctValues.push(i);
+  } else {
+    wrongValues.push(i);
+  }
+}
 
 AFRAME.registerComponent('beat-system', {
   schema: {
@@ -423,10 +432,11 @@ AFRAME.registerComponent('beat', {
       blockEl,
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
-    blockEl.setAttribute('materials', 'name', 'beat');
+    const value = type === 'mine' ? '20' : '10';
+    blockEl.setAttribute('materials', 'name', `beat${value}`);
+
     const mesh = blockEl.getObject3D('mesh');
     mesh.geometry.computeBoundingBox();
-
     this.bbox = mesh.geometry.boundingBox;
 
     if (this.data.type === 'mine') {
@@ -635,12 +645,13 @@ AFRAME.registerComponent('beat', {
  */
 const geometries = {};
 function setObjModelFromTemplate (el, templateId) {
+
   // Load into cache.
   if (!geometries[templateId]) {
     const templateEl = document.getElementById(templateId);
     if (templateEl.getObject3D('mesh')) {
       // Set cache.
-      geometries[templateId] = templateEl.getObject3D('mesh').children[0].geometry;
+      geometries[templateId] = templateEl.getObject3D('mesh').geometry;
     } else {
       // Wait.
       templateEl.addEventListener('object3dset', evt => {
