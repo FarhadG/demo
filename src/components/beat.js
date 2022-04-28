@@ -642,13 +642,7 @@ function setObjModelFromTemplate (el, templateId) {
     const templateEl = document.getElementById(templateId);
     if (templateEl.getObject3D('mesh')) {
       // Set cache.
-      // if (templateId === 'mineObjTemplate') {
-      if (templateEl.getObject3D('mesh').children.length) {
-        geometries[templateId] = templateEl.getObject3D('mesh').children[0].geometry;
-      } else {
-        geometries[templateId] = templateEl.getObject3D('mesh').geometry;
-      }
-
+      geometries[templateId] = templateEl.getObject3D('mesh').geometry;
     } else {
       // Wait.
       templateEl.addEventListener('object3dset', evt => {

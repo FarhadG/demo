@@ -16,11 +16,10 @@ AFRAME.registerSystem('materials', {
     this.textureList = [];
 
     // Generated textures.
-    for (let i = 11; i <20; i++) {
-      const textureName = `beat${i}Texture`;
-      this[textureName] = new THREE.TextureLoader().load(document.getElementById(`num${i}`).src);
+    forEachBeat(({ textureName, imageName }) => {
+      this[textureName] = new THREE.TextureLoader().load(document.getElementById(imageName).src);
       this.textureList.push(this[textureName]);
-    }
+    });
 
     this.mineTexture = new THREE.TextureLoader().load(document.getElementById('numX').src);
 
@@ -28,13 +27,6 @@ AFRAME.registerSystem('materials', {
     this.envmapTexture = new THREE.CanvasTexture(this.envmapCanvas);
     this.generateEnvmapTexture();
     this.textureList.push(this.envmapTexture);
-
-    /*
-    this.cutFxCanvas = document.createElement('canvas');
-    this.cutFxTexture = new THREE.CanvasTexture(this.cutFxCanvas);
-    this.generateCutFxTexture();
-    this.textureList.push(this.cutFxTexture);
-    */
 
     this.fistsCanvas = document.createElement('canvas');
     this.fistsTexture = new THREE.CanvasTexture(this.fistsCanvas);
@@ -241,13 +233,11 @@ AFRAME.registerSystem('materials', {
       transparent: true
     });
 
-    for (let i = 10; i <=20; i++) {
-      const beatName = `beat${i}`;
-      const textureName = `beat${i}Texture`;
+    forEachBeat(({ beatName, textureName }) => {
       this[beatName] = new THREE.MeshLambertMaterial({
         map: this[textureName], transparent: true
       });
-    }
+    });
 
     this.mine = new THREE.MeshLambertMaterial({
       map: this.mineTexture, transparent: true
@@ -691,4 +681,14 @@ function canvasGradient (ctx, col1, col2, x, y, width, height) {
   gradient.addColorStop(1, col2);
   ctx.fillStyle = gradient;
   ctx.fillRect(x, y, width, height);
+}
+
+function forEachBeat(cb) {
+  for (let i = 10; i < 20; i++) {
+    cb({
+      textureName: `beat${i}Texture`,
+      beatName: `beat${i}`,
+      imageName: `num${i}`
+    });
+  }
 }
