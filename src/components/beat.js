@@ -66,6 +66,15 @@ const SIZES = {
   [RIDE]: 0.4
 };
 
+const correctValues = [], wrongValues = [];
+for (let i = 0; i <= 100; i++) {
+  if (i % 9 === 0) {
+    correctValues.push(i);
+  } else {
+    wrongValues.push(i);
+  }
+}
+
 AFRAME.registerComponent('beat-system', {
   schema: {
     gameMode: {default: 'classic', oneOf: ['classic', 'punch', 'ride']},
@@ -423,8 +432,8 @@ AFRAME.registerComponent('beat', {
       blockEl,
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
-    const value = Math.random() > 0.5 ? '11' : '12';
-    blockEl.setAttribute('materials', 'name', type === 'mine' ? 'mine' : `beat${value}`);
+    const value = type === 'mine' ? '20' : '10';
+    blockEl.setAttribute('materials', 'name', `beat${value}`);
 
     const mesh = blockEl.getObject3D('mesh');
     mesh.geometry.computeBoundingBox();
