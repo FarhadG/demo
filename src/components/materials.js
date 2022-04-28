@@ -21,8 +21,6 @@ AFRAME.registerSystem('materials', {
       this.textureList.push(this[textureName]);
     });
 
-    this.mineTexture = new THREE.TextureLoader().load(document.getElementById('numX').src);
-
     this.envmapCanvas = document.createElement('canvas');
     this.envmapTexture = new THREE.CanvasTexture(this.envmapCanvas);
     this.generateEnvmapTexture();
@@ -237,10 +235,6 @@ AFRAME.registerSystem('materials', {
       this[beatName] = new THREE.MeshLambertMaterial({
         map: this[textureName], transparent: true
       });
-    });
-
-    this.mine = new THREE.MeshLambertMaterial({
-      map: this.mineTexture, transparent: true
     });
 
     this.blueBeatPieces = new THREE.MeshLambertMaterial({
