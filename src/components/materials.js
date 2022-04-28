@@ -17,7 +17,11 @@ AFRAME.registerSystem('materials', {
 
     // Generated textures.
     forEachBeat(({ textureName, imageName }) => {
-      this[textureName] = new THREE.TextureLoader().load(document.getElementById(imageName).src);
+      let imageSrc = document.getElementById(imageName).src;
+      if (!imageSrc.includes('localhost')) {
+        imageSrc = imageSrc.split('assets').join('demo');
+      }
+      this[textureName] = new THREE.TextureLoader().load(imageSrc);
       this.textureList.push(this[textureName]);
     });
 
@@ -232,9 +236,7 @@ AFRAME.registerSystem('materials', {
     });
 
     forEachBeat(({ beatName, textureName }) => {
-      this[beatName] = new THREE.MeshLambertMaterial({
-        map: this[textureName], transparent: true
-      });
+      this[beatName] = new THREE.MeshLambertMaterial({ map: this[textureName] });
     });
 
     this.blueBeatPieces = new THREE.MeshLambertMaterial({
