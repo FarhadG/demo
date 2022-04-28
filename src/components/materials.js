@@ -413,16 +413,16 @@ AFRAME.registerSystem('materials', {
     const scene = this.el.sceneEl;
     const scheme = this.scheme = COLORS.schemes[colorSchemeName] || COLORS.schemes.default;
 
-    set(this.arrowBluePlume, 'color', scheme.primary);
+    set(this.arrowBluePlume, 'color', scheme.secondary);
     set(this.arrowRedPlume, 'color', scheme.primary);
     set(this.aurora, 'colorPrimary', scheme.primary);
-    set(this.aurora, 'colorSecondary', scheme.primary);
+    set(this.aurora, 'colorSecondary', scheme.secondary);
     set(this.backglow, 'color', scheme.primary);
-    set(this.blueBeatGlow, 'color', scheme.primary);
-    set(this.blueBeatGlow, 'color', scheme.primary);
-    set(this.blueBeatPieces, 'color', scheme.primary);
-    set(this.blueBeatPieces, 'emissive', scheme.primary);
-    set(this.dotBluePlume, 'color', scheme.primary);
+    set(this.blueBeatGlow, 'color', scheme.secondary);
+    set(this.blueBeatGlow, 'color', scheme.secondary);
+    set(this.blueBeatPieces, 'color', scheme.secondary);
+    set(this.blueBeatPieces, 'emissive', scheme.secondary);
+    set(this.dotBluePlume, 'color', scheme.secondary);
     set(this.dotRedPlume, 'color', scheme.primary);
     set(this.handStarTrail, 'colorPrimary', scheme.primary);
     set(this.handStarTrail, 'colorSecondary', scheme.secondary);
@@ -435,18 +435,18 @@ AFRAME.registerSystem('materials', {
     set(this.leftWeapon, 'color', scheme.primary);
     set(this.leftWeaponHandle, 'color', scheme.primary);
     set(this.merkaba, 'color', scheme.primary);
-    set(this.minePieces, 'color', scheme.primary);
-    set(this.minePieces, 'emissive', scheme.primary);
-    set(this.minePlume, 'color', scheme.primary);
+    set(this.minePieces, 'color', scheme.tertiary);
+    set(this.minePieces, 'emissive', scheme.tertiary);
+    set(this.minePlume, 'color', scheme.tertiary);
     set(this.moon, 'tint', scheme.secondarybright);
     set(this.redBeatGlow, 'color', scheme.primary);
     set(this.redBeatGlow, 'color', scheme.primary);
     set(this.redBeatPieces, 'color', scheme.primary);
     set(this.redBeatPieces, 'emissive', scheme.primary);
-    set(this.rightFist, 'color', scheme.primary);
-    set(this.rightWeapon, 'color', scheme.primary);
-    set(this.rightFistWeapon, 'color', scheme.primary);
-    set(this.rightWeaponHandle, 'color', scheme.primary);
+    set(this.rightFist, 'color', scheme.secondarybright);
+    set(this.rightWeapon, 'color', scheme.secondary);
+    set(this.rightFistWeapon, 'color', scheme.secondary);
+    set(this.rightWeaponHandle, 'color', scheme.secondary);
     set(this.rings, 'colorPrimary', scheme.primary);
     set(this.rings, 'colorSecondary', scheme.secondary);
     set(this.rings, 'colorTertiary', scheme.tertiary);
@@ -456,6 +456,7 @@ AFRAME.registerSystem('materials', {
     set(this.tunnel, 'color2', scheme.secondary);
     set(this.tunnel, 'color3', scheme.tertiary);
 
+    this.generateBeatsTexture();
     // this.generateCutFxTexture();
     this.generateEnvmapTexture();
     this.generateFistsTexture();

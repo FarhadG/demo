@@ -71,12 +71,12 @@
     <require path="assets.html"></require>
   </a-assets>
 
-  <a-box id="beatObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
-  <a-box id="redBeatObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
-  <a-box id="blueBeatObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
-  <a-box id="dotRedObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
-  <a-box id="dotBlueObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
-  <a-box id="mineObjTemplate" visible="false" width="0.2" height="0.2" depth="0.2"></a-box>
+  <a-entity id="beatObjTemplate" obj-model="obj: #beatObj" visible="false"></a-entity>
+  <a-entity id="redBeatObjTemplate" obj-model="obj: #redBeatObj" visible="false"></a-entity>
+  <a-entity id="blueBeatObjTemplate" obj-model="obj: #blueBeatObj" visible="false"></a-entity>
+  <a-entity id="dotRedObjTemplate" obj-model="obj: #dotRedObj" visible="false"></a-entity>
+  <a-entity id="dotBlueObjTemplate" obj-model="obj: #dotBlueObj" visible="false"></a-entity>
+  <a-entity id="mineObjTemplate" obj-model="obj: #mineObj" visible="false"></a-entity>
   <a-entity id="cursorLaser" obj-model="obj: #laserObj" visible="false"></a-entity>
 
   <require path="templates/loading.html"></require>
@@ -186,7 +186,7 @@
           <a-entity
             id="{{ hand }}Laser"
             class="laser"
-            bind__material="color: colorPrimary"
+            bind__material="color: {{ hand === 'left' and 'colorPrimary' or 'colorSecondary' }}"
             bind__cursor-laser="enabled: activeHand === '{{ hand }}' && !isPlaying"
             geometry="primitive: cylinder; height: 1; radius: 0.005"
             material="shader: flat; opacity: 0.25; transparent: true"
