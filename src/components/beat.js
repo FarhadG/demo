@@ -424,8 +424,8 @@ AFRAME.registerComponent('beat', {
       MODELS[type !== 'mine' ? `${type}${this.data.color}` : type]);
 
     const value = Math.random() > 0.5 ? '11' : '12';
-
     blockEl.setAttribute('materials', 'name', type === 'mine' ? 'mine' : `beat${value}`);
+
     const mesh = blockEl.getObject3D('mesh');
     mesh.geometry.computeBoundingBox();
     this.bbox = mesh.geometry.boundingBox;
