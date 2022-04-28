@@ -19,7 +19,7 @@ AFRAME.registerSystem('materials', {
     forEachBeat(({ textureName, imageName }) => {
       let imageSrc = document.getElementById(imageName).src;
       if (!imageSrc.includes('localhost')) {
-        imageSrc = imageSrc.split('assets').join('demo');
+        imageSrc = imageSrc.split('assets').join('demo/assets');
       }
       this[textureName] = new THREE.TextureLoader().load(imageSrc);
       this.textureList.push(this[textureName]);
