@@ -17,11 +17,7 @@ AFRAME.registerSystem('materials', {
 
     // Generated textures.
     forEachBeat(({ textureName, imageName }) => {
-      let imageSrc = document.getElementById(imageName).src;
-      if (!imageSrc.includes('localhost')) {
-        imageSrc = imageSrc.split('assets').join('demo/assets');
-      }
-      this[textureName] = new THREE.TextureLoader().load(imageSrc);
+      this[textureName] = new THREE.TextureLoader().load(document.getElementById(imageName).src);
       this.textureList.push(this[textureName]);
     });
 
